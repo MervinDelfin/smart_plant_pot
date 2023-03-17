@@ -10,17 +10,10 @@
 {% block content %}
 
 
-<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-xs">
 
       <svg width="100%" viewbox="0 0 30 42">
        
-        
-
-        <path fill="#F4ADAD" stroke="transparent" stroke-width="0.5"
-        d="M15 3
-        Q16.5 6.8 25 18
-        A12.8 12.8 0 1 1 5 18
-        Q13.5 6.8 15 3z" clip-path="url(#red-zone-def)"/>
 
         <path fill="#C7F5C7" stroke="transparent" stroke-width="0.5"
         d="M15 3
@@ -82,8 +75,9 @@
         </defs>
         
       </svg>
+      <p class="text-center">Wilgotność ziemi: {{ water_level|floatformat }}%</p>
 </div>
-<p>Water Level: {{ water_level|floatformat }}%</p>
+
 
 {% comment %} <span class="ikoncircle" id="can">
     <svg class="genelsvgs" id="katman_1" data-name="katman 1"   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
