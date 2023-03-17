@@ -1,0 +1,104 @@
+{% extends 'smart_plant_pot/base.html' %}
+
+{% block title %}Smart Plant Pot{% endblock %}
+{% block staticLinks %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'smart_plant_pot/drop.css' %}">
+{% endblock %}  
+{% load subtract %}
+
+{% block content %}
+
+
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+
+      <svg width="100%" viewbox="0 0 30 42">
+       
+        
+
+        <path fill="#F4ADAD" stroke="transparent" stroke-width="0.5"
+        d="M15 3
+        Q16.5 6.8 25 18
+        A12.8 12.8 0 1 1 5 18
+        Q13.5 6.8 15 3z" clip-path="url(#red-zone-def)"/>
+
+        <path fill="#C7F5C7" stroke="transparent" stroke-width="0.5"
+        d="M15 3
+        Q16.5 6.8 25 18
+        A12.8 12.8 0 1 1 5 18
+        Q13.5 6.8 15 3z" clip-path="url(#green-zone-def)"/> 
+
+        <path fill="#47A7D9" stroke="transparent" stroke-width="0.5"
+              d="M15 3
+                 Q16.5 6.8 25 18
+                 A12.8 12.8 0 1 1 5 18
+                 Q13.5 6.8 15 3z" clip-path="url(#water)"/> 
+            
+        <path fill="#47D95E" stroke="transparent" stroke-width="0.5"
+                 d="M15 3
+                 Q16.5 6.8 25 18
+                 A12.8 12.8 0 1 1 5 18
+                 Q13.5 6.8 15 3z" clip-path="url(#green-zone)"/> 
+
+            <path fill="#D94747" stroke="transparent" stroke-width="0.5"
+                 d="M15 3
+                 Q16.5 6.8 25 18
+                 A12.8 12.8 0 1 1 5 18
+                 Q13.5 6.8 15 3z" clip-path="url(#red-zone)"/> 
+
+        <path fill="transparent" stroke="#888" stroke-width="0.5"
+        d="M15 3
+           Q16.5 6.8 25 18
+           A12.8 12.8 0 1 1 5 18
+           Q13.5 6.8 15 3z" />
+        
+        <defs>
+            <clipPath id="water">
+            {% comment %} y = < 92; 8 > {% endcomment %}
+            {% widthratio water_level 100 84 as level %}
+            <rect x="0" y="{{ 92|subtract:level }}%" width="100%" height="100%" />
+            </clipPath>
+
+            <clipPath id="red-zone-def">
+                {% comment %} height = 84-MAX-8 {% endcomment %}
+                {% widthratio water_max 100 84 as water_max_ratio %}
+                <rect x="0" y="0" width="100%" height="{{ 92|subtract:water_max_ratio }}%" />
+            </clipPath>
+
+            <clipPath id="green-zone-def">
+                {% comment %} y = < 92; 8 > state {% endcomment %}
+                {% comment %} height = < MAX-y; MAX-8 > {% endcomment %}
+                {% widthratio water_min 100 84 as water_min_ratio %}
+                <rect x="0" y="{{ 92|subtract:water_max_ratio }}%" width="100%" height="{{ water_max_ratio|subtract:water_min_ratio }}%" />
+            </clipPath>
+
+            <clipPath id="green-zone">
+                <rect x="0" y="{{ 92|subtract:level }}%" width="100%" height="{{ level|subtract:water_min_ratio }}%" />
+            </clipPath>
+
+            <clipPath id="red-zone">
+                <rect x="0" y="{{ 92|subtract:level }}%" width="100%" height="{{ level|subtract:water_max_ratio }}%" />
+            </clipPath>
+        </defs>
+        
+      </svg>
+</div>
+<p>Water Level: {{ water_level|floatformat }}%</p>
+
+{% comment %} <span class="ikoncircle" id="can">
+    <svg class="genelsvgs" id="katman_1" data-name="katman 1"   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+      <defs>
+        <clipPath id="cut-off-bottom">
+          <rect x="0" y="20" width="200" height="50" />
+        </clipPath>
+      </defs>
+      <title>kalp</title>
+  
+      <path class="bg" d="M1.11,13.75c.13-4,1.58-7.26,5.5-8.88,4.08-1.68,7.85-.84,11.3,1.77a4.22,4.22,0,0,1,.91.88c.75,1,1.37.93,2.26,0A11.36,11.36,0,0,1,29.25,4c6.45-.16,10.52,5.52,9.48,11.56-.78,4.55-3.46,8.06-6.3,11.5-3.26,4-7.35,7-11.17,10.36A1.63,1.63,0,0,1,19,37.6C12.87,32.83,7.05,27.76,3.1,20.94A13.31,13.31,0,0,1,1.11,13.75Z"/>
+      <path class="cls-1" d="M1.11,13.75c.13-4,1.58-7.26,5.5-8.88,4.08-1.68,7.85-.84,11.3,1.77a4.22,4.22,0,0,1,.91.88c.75,1,1.37.93,2.26,0A11.36,11.36,0,0,1,29.25,4c6.45-.16,10.52,5.52,9.48,11.56-.78,4.55-3.46,8.06-6.3,11.5-3.26,4-7.35,7-11.17,10.36A1.63,1.63,0,0,1,19,37.6C12.87,32.83,7.05,27.76,3.1,20.94A13.31,13.31,0,0,1,1.11,13.75Z" clip-path="url(#cut-off-bottom)"/>
+    </svg>
+  </span> {% endcomment %}
+
+{% endblock %}
+  
+  
