@@ -1,0 +1,24 @@
+{% extends 'smart_plant_pot/base.html' %}
+
+{% block title %}Smart Plant Pot{% endblock %}
+{% block staticLinks %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'smart_plant_pot/drop.css' %}">
+{% endblock %}  
+{% load subtract %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'smart_plant_pot:setDefinedStates' %}">
+    {% csrf_token %}
+    <p>Minimum:</p>
+    <input name="min" type='number' value="{{water_min}}"/>
+    <p>Maximum:</p>
+    <input name="max" type='number' value="{{water_max}}"/>
+
+    <p><input type="submit"/></p>
+</form>
+
+{% endblock %}
+  
+  

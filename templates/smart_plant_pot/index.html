@@ -9,7 +9,11 @@
 
 {% block content %}
 
+<a href="{% url 'smart_plant_pot:settings' %}">
+  Zmień wartości
+</a> 
 
+<p class="description">Ostatnia aktualizacja: {{update_time}}</p>
 <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-xs">
 
       <svg width="100%" viewbox="0 0 30 42">
@@ -79,7 +83,6 @@
 
 </div>
 
-<p class="description">Ostatnia aktualizacja: {{update_time}}</p>
 <style> 
 
 p.description {
@@ -91,20 +94,6 @@ p.description {
 }
 
 </style>
-
-{% comment %} <span class="ikoncircle" id="can">
-    <svg class="genelsvgs" id="katman_1" data-name="katman 1"   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-      <defs>
-        <clipPath id="cut-off-bottom">
-          <rect x="0" y="20" width="200" height="50" />
-        </clipPath>
-      </defs>
-      <title>kalp</title>
-  
-      <path class="bg" d="M1.11,13.75c.13-4,1.58-7.26,5.5-8.88,4.08-1.68,7.85-.84,11.3,1.77a4.22,4.22,0,0,1,.91.88c.75,1,1.37.93,2.26,0A11.36,11.36,0,0,1,29.25,4c6.45-.16,10.52,5.52,9.48,11.56-.78,4.55-3.46,8.06-6.3,11.5-3.26,4-7.35,7-11.17,10.36A1.63,1.63,0,0,1,19,37.6C12.87,32.83,7.05,27.76,3.1,20.94A13.31,13.31,0,0,1,1.11,13.75Z"/>
-      <path class="cls-1" d="M1.11,13.75c.13-4,1.58-7.26,5.5-8.88,4.08-1.68,7.85-.84,11.3,1.77a4.22,4.22,0,0,1,.91.88c.75,1,1.37.93,2.26,0A11.36,11.36,0,0,1,29.25,4c6.45-.16,10.52,5.52,9.48,11.56-.78,4.55-3.46,8.06-6.3,11.5-3.26,4-7.35,7-11.17,10.36A1.63,1.63,0,0,1,19,37.6C12.87,32.83,7.05,27.76,3.1,20.94A13.31,13.31,0,0,1,1.11,13.75Z" clip-path="url(#cut-off-bottom)"/>
-    </svg>
-  </span> {% endcomment %}
 
 {% endblock %}
   

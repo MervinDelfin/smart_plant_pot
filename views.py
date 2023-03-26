@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import State, DefindedState
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.urls import reverse
 
 def format_last_seen_text(last_online):
     time_since_online = timezone.now() - last_online
@@ -30,7 +31,32 @@ def index(request):
         water_min = DefindedState.objects.get(name="min").moisture
         water_max = DefindedState.objects.get(name="max").moisture
     except ObjectDoesNotExist:
-        return HttpResponseBadRequest("Ustaw najpierw minimalaną i maksymalną wartość")
+        DefindedState.objects.create(name="min", moisture=30).save()
+        DefindedState.objects.create(name='max', moisture=60).save()
 
 
     return render(request, 'smart_plant_pot/index.html', {'water_level': state.moisture/1024*100, 'water_max':water_max, 'water_min': water_min, 'update_time': format_last_seen_text(state.date)})
+
+
+
+def settings(request):
+    water_min = DefindedState.objects.get(name="min").moisture
+    water_max = DefindedState.objects.get(name="max").moisture
+    return render(request, 'smart_plant_pot/settings.html', {'water_max':water_max, 'water_min': water_min})
+
+
+def setDefinedStates(request):
+    if request.method != "POST" or 'min' not in request.POST or 'max' not in request.POST:
+        return HttpResponseBadRequest("bad request")
+    
+    water_min = DefindedState.objects.get(name="min")
+    water_min.moisture = int(request.POST['min'])
+    water_min.save()
+
+    water_max = DefindedState.objects.get(name="max")
+    water_max.moisture = int(request.POST['max'])
+    water_max.save()
+
+    return HttpResponseRedirect(reverse('smart_plant_pot:index'))
+
+    
