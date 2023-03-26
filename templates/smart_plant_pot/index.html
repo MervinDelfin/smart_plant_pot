@@ -76,8 +76,21 @@
         
       </svg>
       <p class="text-center">Wilgotność ziemi: {{ water_level|floatformat }}%</p>
+
 </div>
 
+<p class="description">Ostatnia aktualizacja: {{update_time}}</p>
+<style> 
+
+p.description {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-align: right;
+    margin-top: 0.5rem;
+    padding: 4px 8px;
+}
+
+</style>
 
 {% comment %} <span class="ikoncircle" id="can">
     <svg class="genelsvgs" id="katman_1" data-name="katman 1"   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
