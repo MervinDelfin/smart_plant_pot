@@ -26,7 +26,7 @@ class StateViewSet(viewsets.ModelViewSet):
         ):
             print("Moisture is too low, sending message")
 
-            Message.objects.create(message=f"Moisture is too low, please water the plant! {int(request.data['moisture'])/1024*100}%")
+            Message.objects.create(message=f"Moisture too low: {int(request.data['moisture'])/1024*100}%")
 
             url = reverse('smart_plant_pot:index')
             absolute_url = request.build_absolute_uri(url)
