@@ -20,7 +20,7 @@ class StateViewSet(viewsets.ModelViewSet):
 
         water_min = DefindedState.objects.get(name="min").moisture
         if int(request.data['moisture'])/1024*100 < water_min and (
-            Message.objects.exists() and
+            not Message.objects.exists() or
             Message.objects.latest('date').date < timezone.now() - timedelta(hours=2)
         ):
             print("Moisture is too low, please water the plant!")
