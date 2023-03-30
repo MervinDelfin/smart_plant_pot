@@ -3,17 +3,20 @@
 {% block title %}Smart Plant Pot{% endblock %}
 {% block staticLinks %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'smart_plant_pot/drop.css' %}">
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'smart_plant_pot/drop.css' %}"> {% endcomment %}
 {% endblock %}  
 {% load subtract %}
 
 {% block content %}
 
-<a href="{% url 'smart_plant_pot:settings' %}">
-  Zmień wartości
-</a> 
+<div class="flex justify-between items-center">
+    <a href="{% url 'smart_plant_pot:settings' %}" class="bg-blue-500 p-2 px-3 m-2 rounded-lg inline-block text-white text-sm">
+        Zmień wartości
+    </a> 
 
-<p class="description">Ostatnia aktualizacja: {{update_time}}</p>
+    <p class="text-gray-400 text-sm p-2">Ostatnia aktualizacja: {{update_time}}</p>
+</div>
+
 <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-xs">
 
       <svg width="100%" viewbox="0 0 30 42">
@@ -83,17 +86,7 @@
 
 </div>
 
-<style> 
 
-p.description {
-    font-size: 0.8rem;
-    color: #6c757d;
-    text-align: right;
-    margin-top: 0.5rem;
-    padding: 4px 8px;
-}
-
-</style>
 
 {% endblock %}
   

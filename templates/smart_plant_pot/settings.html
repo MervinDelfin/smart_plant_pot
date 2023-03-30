@@ -9,14 +9,15 @@
 
 {% block content %}
 
-<form method="POST" action="{% url 'smart_plant_pot:setDefinedStates' %}">
+<form method="POST" action="{% url 'smart_plant_pot:setDefinedStates' %}" class="mt-4">
     {% csrf_token %}
-    <p>Minimum:</p>
-    <input name="min" type='number' value="{{water_min}}"/>
-    <p>Maximum:</p>
-    <input name="max" type='number' value="{{water_max}}"/>
+    <p class="text-center text-gray-500 text-sm">Minimum:</p>
+    <p class="text-center mb-3"><input name="min" type='number' value="{{water_min}}" class="w-16 text-center rounded-md" /></p>
+    
+    <p class="text-center text-gray-500 text-sm">Maximum:</p>
+    <p class="text-center mb-3"><input name="max" type='number' value="{{water_max}}" class="w-16 text-center rounded-md"/></p>
 
-    <p><input type="submit"/></p>
+    <p class="text-center"><input type="submit" value="Zapisz" class="bg-green-600 p-2 px-4 m-2 rounded-lg inline-block text-white text-s"/></p>
 </form>
 
 {% endblock %}
