@@ -31,7 +31,7 @@ class StateViewSet(viewsets.ModelViewSet):
             url = reverse('smart_plant_pot:index')
             absolute_url = request.build_absolute_uri(url)
 
-            send_bot_ai_message_generic_link_button.delay(f"Jesteś botem przypominającym o podlewaniu bazylii. Poziom wilgotności w ziemi własnie spadł poniżej {water_min}% i trzeba podlać roślinę. Napisz śmieszną wiadomość, która przypomni o podlaniu rośliny.", [Persons.objects.get(name="Marvin").chatfuel_id], absolute_url)
+            send_bot_ai_message_generic_link_button.delay(f"Jesteś botem przypominającym o podlewaniu bazylii. Poziom wilgotności w ziemi własnie spadł poniżej {water_min}% i trzeba podlać roślinę. Napisz śmieszną wiadomość, która przypomni o podlaniu rośliny.", [Persons.objects.get(name="Marvin").chatfuel_id], absolute_url, "Podlej roślinę")
 
         return super().create(request)
 
