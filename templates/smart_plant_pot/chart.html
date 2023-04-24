@@ -1,0 +1,81 @@
+{% extends 'smart_plant_pot/base.html' %}
+
+{% block title %}Smart Plant Pot{% endblock %}
+{% block staticLinks %}
+{% load static %}
+<!--Chart js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<!-- date adapter -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+{% endblock %}  
+{% load subtract %}
+
+
+{% block content %}
+
+
+<script>
+    // jquery function
+    $(document).ready(function(){
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [{%for datael in data%}{{datael.date|date:"U"}}000,{%endfor%}], //loop through queryset, 
+                datasets: [{
+                    label: 'Wilgotność w %',
+                    data: [{%for datael in data%}{% widthratio 0.09765 1 datael.moisture %},{%endfor%}],
+                    backgroundColor: [
+                        'rgba(132, 120, 230, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(132, 99, 230, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            parsing: false,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    },
+                    xAxes: [{
+                        type: 'time',        
+                        time: {
+                          unit: 'hour',
+                          displayFormats: {
+                            hour: 'HH:mm dd.MM'
+                          },
+                          tooltipFormat: 'HH:mm dd.MM'
+                        },
+                        scaleLabel: {
+                          labelString: 'Timestamp'
+                        }
+                      }],
+                }
+            }
+        });
+    });
+    </script>
+
+<div class="flex justify-between items-center">
+    <a href="{% url 'smart_plant_pot:settings' %}" class="bg-blue-500 p-2 px-3 m-2 rounded-lg inline-block text-white text-sm">
+        Zmień wartości
+    </a> 
+
+    <p class="text-gray-400 text-sm p-2">Ostatnia aktualizacja: {{update_time}}</p>
+</div>
+
+<canvas id="myChart"></canvas>
+
+
+{% endblock %}
+  
+  

@@ -10,9 +10,14 @@
 {% block content %}
 
 <div class="flex justify-between items-center">
-    <a href="{% url 'smart_plant_pot:settings' %}" class="bg-blue-500 p-2 px-3 m-2 rounded-lg inline-block text-white text-sm">
-        Zmień wartości
-    </a> 
+    <div>
+        <a href="{% url 'smart_plant_pot:settings' %}" class="bg-blue-500 p-2 px-3 m-2 rounded-lg inline-block text-white text-sm">
+            Zmień wartości
+        </a> 
+        <a href="{% url 'smart_plant_pot:chart' %}" class="bg-blue-500 p-2 px-3 m-2 rounded-lg inline-block text-white text-sm">
+            Wykres
+        </a> 
+    </div>
 
     <p class="text-gray-400 text-sm p-2">Ostatnia aktualizacja: {{update_time}}</p>
 </div>

@@ -60,3 +60,13 @@ def setDefinedStates(request):
     return HttpResponseRedirect(reverse('smart_plant_pot:index'))
 
     
+def chart(requst):
+
+    state = State.objects.order_by('-date').first()
+
+    context = {
+        'data': State.objects.order_by('-date')[:10000:-100],
+        'update_time': format_last_seen_text(state.date)
+    }
+
+    return render(requst, 'smart_plant_pot/chart.html', context)
